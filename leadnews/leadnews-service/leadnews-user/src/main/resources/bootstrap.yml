@@ -1,0 +1,12 @@
+server:
+  port: 51801
+spring:
+  application:
+    name: leadnews-user
+  cloud:
+    nacos:
+      discovery: # 注册中心
+        server-addr: 192.168.193.40:8848
+      config: # 配置中心
+        server-addr: 192.168.193.40:8848
+        file-extension: yml
