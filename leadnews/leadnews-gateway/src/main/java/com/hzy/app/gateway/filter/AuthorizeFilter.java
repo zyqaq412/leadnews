@@ -40,9 +40,9 @@ public class AuthorizeFilter implements Ordered, GlobalFilter {
         ServerHttpRequest request = exchange.getRequest();
         ServerHttpResponse response = exchange.getResponse();
 
-        if (1 == 1){
+/*        if (1 == 1){
             return chain.filter(exchange);
-        }
+        }*/
 
         // 2.判断是否是登录
         if (request.getURI().getPath().contains("/login")) {
@@ -54,7 +54,7 @@ public class AuthorizeFilter implements Ordered, GlobalFilter {
         String token = request.getHeaders().getFirst("token");
 
         // 4.判断token是否存在
-        if (StringUtils.isNotBlank(token)) {
+        if (!StringUtils.isNotBlank(token)) {
             response.setStatusCode(HttpStatus.UNAUTHORIZED);
             // 结束请求
             return response.setComplete();
