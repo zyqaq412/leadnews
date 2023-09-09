@@ -10,3 +10,9 @@ spring:
       config:
         server-addr: 192.168.193.40:8848
         file-extension: yml
+minio:
+  accessKey: JI166QRTQ5CGWX3ANHQM
+  secretKey: nTLDW0jhTiSWJcopvcKag7QzWwuTpCVYPZesxq0X
+  endpoint: http://192.168.193.40:9000
+  bucket: leadnews
+  readPath: http://192.168.193.40:9000
