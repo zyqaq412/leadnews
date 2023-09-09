@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/leadnews-basic/file-starter/file-starter.iml" filepath="$PROJECT_DIR$/leadnews-basic/file-starter/file-starter.iml" />
       <module fileurl="file://$PROJECT_DIR$/heima-leadnews.iml" filepath="$PROJECT_DIR$/heima-leadnews.iml" />
       <module fileurl="file://$PROJECT_DIR$/heima-leadnews-common/heima-leadnews-common.iml" filepath="$PROJECT_DIR$/heima-leadnews-common/heima-leadnews-common.iml" />
       <module fileurl="file://$PROJECT_DIR$/heima-leadnews-feign-api/heima-leadnews-feign-api.iml" filepath="$PROJECT_DIR$/heima-leadnews-feign-api/heima-leadnews-feign-api.iml" />
@@ -9,6 +10,12 @@
       <module fileurl="file://$PROJECT_DIR$/heima-leadnews-model/heima-leadnews-model.iml" filepath="$PROJECT_DIR$/heima-leadnews-model/heima-leadnews-model.iml" />
       <module fileurl="file://$PROJECT_DIR$/heima-leadnews-service/heima-leadnews-service.iml" filepath="$PROJECT_DIR$/heima-leadnews-service/heima-leadnews-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/heima-leadnews-test/heima-leadnews-test.iml" filepath="$PROJECT_DIR$/heima-leadnews-test/heima-leadnews-test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/leadnews-app-gateway.iml" filepath="$PROJECT_DIR$/leadnews-app-gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/leadnews-common/leadnews-common.iml" filepath="$PROJECT_DIR$/leadnews-common/leadnews-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/leadnews-feign-api/leadnews-feign-api.iml" filepath="$PROJECT_DIR$/leadnews-feign-api/leadnews-feign-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/leadnews-model/leadnews-model.iml" filepath="$PROJECT_DIR$/leadnews-model/leadnews-model.iml" />
+      <module fileurl="file://$PROJECT_DIR$/leadnews-service/leadnews-service.iml" filepath="$PROJECT_DIR$/leadnews-service/leadnews-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/leadnews-utils/leadnews-utils.iml" filepath="$PROJECT_DIR$/leadnews-utils/leadnews-utils.iml" />
     </modules>
   </component>
 </project>
