@@ -1,6 +1,7 @@
 package com.hzy.wemedia.controller.v1;
 
 import com.hzy.model.common.dtos.ResponseResult;
+import com.hzy.model.media.dtos.WmNewsDto;
 import com.hzy.model.media.dtos.WmNewsPageReqDto;
 import com.hzy.wemedia.service.WmNewsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,4 +28,10 @@ public class WmNewsController {
     public ResponseResult findAll(@RequestBody WmNewsPageReqDto dto){
         return  wmNewsService.findAll(dto);
     }
+
+    @PostMapping("/submit")
+    public ResponseResult submitNews(@RequestBody WmNewsDto dto){
+        return  wmNewsService.submitNews(dto);
+    }
+
 }

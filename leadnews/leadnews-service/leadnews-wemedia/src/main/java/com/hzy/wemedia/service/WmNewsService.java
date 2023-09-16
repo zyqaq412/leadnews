@@ -2,6 +2,7 @@ package com.hzy.wemedia.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.hzy.model.common.dtos.ResponseResult;
+import com.hzy.model.media.dtos.WmNewsDto;
 import com.hzy.model.media.dtos.WmNewsPageReqDto;
 import com.hzy.model.media.pojos.WmNews;
 
@@ -19,5 +20,10 @@ public interface WmNewsService extends IService<WmNews> {
      * @return
      */
     ResponseResult findAll(WmNewsPageReqDto dto);
-
+    /**
+     *  发布文章或保存草稿
+     * @param dto
+     * @return
+     */
+    ResponseResult submitNews(WmNewsDto dto);
 }
