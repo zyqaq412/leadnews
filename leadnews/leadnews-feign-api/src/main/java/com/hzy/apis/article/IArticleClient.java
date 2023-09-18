@@ -1,5 +1,6 @@
 package com.hzy.apis.article;
 
+import com.hzy.apis.article.fallback.IArticleClientFallback;
 import com.hzy.model.article.dtos.ArticleDto;
 import com.hzy.model.common.dtos.ResponseResult;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
  * @Date: 2023/9/18 12:51
  * @Version 1.0
  */
-@FeignClient("leadnews-article")
+@FeignClient(value="leadnews-article",fallback = IArticleClientFallback.class)
 public interface IArticleClient {
 
     @PostMapping("/api/v1/article/save")
