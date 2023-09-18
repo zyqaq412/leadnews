@@ -32,6 +32,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Date;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 
 /**
@@ -120,9 +122,14 @@ public class ApArticleServiceImpl extends ServiceImpl<ApArticleMapper, ApArticle
         }
 
         // 保存文章 使用freemarker根据内容生成html文件上传到minio，访问文章详情时返回html文件路径
-        createHtml(articleDto,article.getId());
+        CREATEHTML.submit(() ->{
+            createHtml(articleDto,article.getId());
+        });
+
         return ResponseResult.okResult(article.getId());
     }
+    private static final ExecutorService CREATEHTML = Executors.newFixedThreadPool(10);
+
     @Autowired
     private Configuration configuration;
 
