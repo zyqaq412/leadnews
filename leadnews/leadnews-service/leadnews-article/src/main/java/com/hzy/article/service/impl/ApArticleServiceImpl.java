@@ -1,5 +1,6 @@
 package com.hzy.article.service.impl;
 
+import com.alibaba.fastjson.JSONArray;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hzy.article.mapper.ApArticleConfigMapper;
@@ -7,6 +8,7 @@ import com.hzy.article.mapper.ApArticleContentMapper;
 import com.hzy.article.mapper.ApArticleMapper;
 import com.hzy.article.service.ApArticleService;
 import com.hzy.common.constants.ArticleConstants;
+import com.hzy.file.service.FileStorageService;
 import com.hzy.model.article.dtos.ArticleDto;
 import com.hzy.model.article.dtos.ArticleHomeDto;
 import com.hzy.model.article.pojos.ApArticle;
@@ -14,6 +16,8 @@ import com.hzy.model.article.pojos.ApArticleConfig;
 import com.hzy.model.article.pojos.ApArticleContent;
 import com.hzy.model.common.dtos.ResponseResult;
 import com.hzy.model.common.enums.AppHttpCodeEnum;
+import freemarker.template.Configuration;
+import freemarker.template.Template;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
@@ -21,8 +25,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.io.StringWriter;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Date;
+import java.util.Map;
 
 
 /**
@@ -110,7 +119,44 @@ public class ApArticleServiceImpl extends ServiceImpl<ApArticleMapper, ApArticle
 
         }
 
-
+        // 保存文章 使用freemarker根据内容生成html文件上传到minio，访问文章详情时返回html文件路径
+        createHtml(articleDto,article.getId());
         return ResponseResult.okResult(article.getId());
     }
+    @Autowired
+    private Configuration configuration;
+
+    @Autowired
+    private FileStorageService fileStorageService;
+
+
+    private void createHtml(ArticleDto articleDto, Long id) {
+
+        try {
+            // 文章内容通过freemarker生成html文件
+            StringWriter out = new StringWriter();
+            Template template = configuration.getTemplate("article.ftl");
+
+            Map<String, Object> params = new HashMap<>();
+            params.put("content", JSONArray.parseArray(articleDto.getContent()));
+
+            template.process(params, out);
+            InputStream is = new ByteArrayInputStream(out.toString().getBytes());
+
+            // 把html文件上传到minio中
+            String path = fileStorageService
+                    .uploadHtmlFile("", id + ".html", is);
+
+            // 修改ap_article表，保存static_url字段
+            ApArticle article = new ApArticle();
+            article.setId(id);
+            article.setStaticUrl(path);
+            apArticleMapper.updateById(article);
+
+        }catch (Exception e){
+
+        }
+
+    }
+
 }
