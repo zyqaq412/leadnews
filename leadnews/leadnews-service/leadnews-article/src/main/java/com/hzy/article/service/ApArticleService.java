@@ -1,6 +1,7 @@
 package com.hzy.article.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.hzy.model.article.dtos.ArticleDto;
 import com.hzy.model.article.dtos.ArticleHomeDto;
 import com.hzy.model.article.pojos.ApArticle;
 import com.hzy.model.common.dtos.ResponseResult;
@@ -20,4 +21,11 @@ public interface ApArticleService extends IService<ApArticle> {
      * @return
      */
     ResponseResult load(ArticleHomeDto dto,Short type);
+
+    /**
+     *  保存app端文章
+     * @param articleDto 文章内容
+     * @return
+     */
+    ResponseResult save(ArticleDto articleDto);
 }
