@@ -16,3 +16,6 @@ minio:
   endpoint: http://192.168.193.40:9000
   bucket: leadnews
   readPath: http://192.168.193.40:9000
+tess4j:
+  data-path: D:\logs\test\workspace\tessdata
+  language: chi_sim
