@@ -22,6 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -122,13 +123,14 @@ public class ApArticleServiceImpl extends ServiceImpl<ApArticleMapper, ApArticle
         }
 
         // 保存文章 使用freemarker根据内容生成html文件上传到minio，访问文章详情时返回html文件路径
-        CREATEHTML.submit(() ->{
+/*        CREATEHTML.submit(() ->{
             createHtml(articleDto,article.getId());
-        });
+        });*/
+        createHtml(articleDto,article.getId());
 
         return ResponseResult.okResult(article.getId());
     }
-    private static final ExecutorService CREATEHTML = Executors.newFixedThreadPool(10);
+   // private static final ExecutorService CREATEHTML = Executors.newFixedThreadPool(10);
 
     @Autowired
     private Configuration configuration;
@@ -137,7 +139,8 @@ public class ApArticleServiceImpl extends ServiceImpl<ApArticleMapper, ApArticle
     private FileStorageService fileStorageService;
 
 
-    private void createHtml(ArticleDto articleDto, Long id) {
+    @Async
+    public void createHtml(ArticleDto articleDto, Long id) {
 
         try {
             // 文章内容通过freemarker生成html文件
