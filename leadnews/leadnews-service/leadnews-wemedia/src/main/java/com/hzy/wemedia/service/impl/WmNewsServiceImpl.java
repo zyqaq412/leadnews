@@ -23,6 +23,7 @@ import com.hzy.wemedia.mapper.WmNewsMapper;
 import com.hzy.wemedia.service.WmNewsAutoScanService;
 import com.hzy.wemedia.service.WmNewsMaterialService;
 import com.hzy.wemedia.service.WmNewsService;
+import com.hzy.wemedia.service.WmNewsTaskService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
@@ -110,7 +111,7 @@ public class WmNewsServiceImpl  extends ServiceImpl<WmNewsMapper, WmNews> implem
     private WmNewsMaterialService wmNewsMaterialService;
 
     @Autowired
-    private WmNewsAutoScanService wmNewsAutoScanService;
+    private WmNewsTaskService wmNewsTaskService;
     @Override
     public ResponseResult submitNews(WmNewsDto dto) {
         //0.条件判断
@@ -148,7 +149,9 @@ public class WmNewsServiceImpl  extends ServiceImpl<WmNewsMapper, WmNews> implem
         saveRelativeInfoForCover(dto,wmNews,materials);
 
         //审核文章
-        wmNewsAutoScanService.autoScanWmNews(wmNews.getId());
+        // wmNewsAutoScanService.autoScanWmNews(wmNews.getId());
+        //
+        wmNewsTaskService.addNewsToTask(wmNews.getId(),wmNews.getPublishTime());
         return ResponseResult.okResult(AppHttpCodeEnum.SUCCESS);
     }
 
