@@ -6,6 +6,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
  * @title: ScheduleApplication
@@ -14,6 +15,7 @@ import org.springframework.context.annotation.Bean;
  * @Version 1.0
  */
 @SpringBootApplication
+@EnableScheduling // 开启自动任务
 @MapperScan("com.hzy.schedule.mapper")
 public class ScheduleApplication {
 
